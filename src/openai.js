@@ -1,6 +1,8 @@
 import { OpenAI } from 'openai'
 import { createReadStream } from 'fs'
-import config from 'config'
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 const CHAT_GPT_MODEL = 'gpt-3.5-turbo'
 
@@ -57,4 +59,4 @@ class OpenAi {
     // }
 }
 
-export const openai = new OpenAi(config.get('OPENAI_KEY'))
+export const openai = new OpenAi(process.env.OPENAI_KEY)

@@ -1,6 +1,5 @@
 import { Telegraf, session } from 'telegraf'
 import { message } from 'telegraf/filters'
-import config from 'config'
 import mongoose from 'mongoose'
 import {
     proccessVoiceMessage,
@@ -9,10 +8,11 @@ import {
     getUserConversations,
 } from './logic.js'
 import { initCommand, normalize } from './utils.js'
+import dotenv from 'dotenv'
 
-console.log(config.get('TEST_ENV'))
+dotenv.config()
 
-const bot = new Telegraf(config.get('TELEGRAM_TOKEN'), {
+const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {
     handlerTimeout: Infinity,
 })
 
@@ -33,12 +33,6 @@ bot.command(
 
 bot.command('history', getUserConversations)
 
-bot.command('admin', async (ctx) => {
-    if (ctx.message.from.id !== config.get('ADMIN_TG_ID')) return
-    await ctx.reply('Привет Владилен')
-    // ctx.sendAudio()
-})
-
 bot.on(message('voice'), proccessVoiceMessage)
 
 bot.on(message('text'), proccessTextMessage)
@@ -47,7 +41,7 @@ bot.on('callback_query', handleCallbackQuery)
 
 async function start() {
     try {
-        await mongoose.connect(config.get('MONGODB_URI'), {
+        await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
