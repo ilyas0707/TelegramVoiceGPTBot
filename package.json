@@ -22,9 +22,11 @@
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@vercel/node": "^3.0.15",
     "axios": "^1.6.5",
     "config": "^3.3.9",
     "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.3.0",
     "fluent-ffmpeg": "^2.1.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
