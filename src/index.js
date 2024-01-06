@@ -8,9 +8,12 @@ import {
     getUserConversations,
 } from './logic.js'
 import { initCommand, normalize } from './utils.js'
+import { development, production } from './core'
 import dotenv from 'dotenv'
 
 dotenv.config()
+
+const ENVIRONMENT = process.env.NODE_ENV || ''
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {
     handlerTimeout: Infinity,
@@ -38,6 +41,12 @@ bot.on(message('voice'), proccessVoiceMessage)
 bot.on(message('text'), proccessTextMessage)
 
 bot.on('callback_query', handleCallbackQuery)
+
+export const startVercel = async (req, res) => {
+    await production(req, res, bot);
+};
+
+ENVIRONMENT !== 'production' && development(bot)
 
 async function start() {
     try {
