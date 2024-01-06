@@ -48,33 +48,3 @@ export const startVercel = async (req, res) => {
 };
 
 ENVIRONMENT !== 'production' && development(bot)
-
-async function start() {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
-
-        bot.launch()
-
-        console.log('MongoDB Connected and bot started.')
-
-        process.on('uncaughtException', (err) => {
-            console.error('Неперехваченное исключение:', err)
-            // process.exit(1)
-        })
-
-        process.on('unhandledRejection', (reason, promise) => {
-            console.error({ unhandledRejection: { reason, promise } })
-        })
-
-        // process.once('SIGINT', () => bot.stop('SIGINT'))
-        // process.once('SIGTERM', () => bot.stop('SIGTERM'))
-    } catch (e) {
-        console.log('Server Error', e.message)
-        process.exit(1)
-    }
-}
-
-start()
