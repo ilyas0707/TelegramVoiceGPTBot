@@ -8,7 +8,8 @@ import {
     getUserConversations,
 } from './logic.js'
 import { initCommand, normalize } from './utils.js'
-import { development, production } from './core'
+import { development } from './core/development.js'
+import { production } from './core/production.js'
 import dotenv from 'dotenv'
 
 dotenv.config()

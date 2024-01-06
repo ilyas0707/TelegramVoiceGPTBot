@@ -5,7 +5,7 @@ const debug = createDebug('bot:dev')
 const PORT = (process.env.PORT && parseInt(process.env.PORT, 10)) || 3000
 const VERCEL_URL = `${process.env.VERCEL_URL}`
 
-const production = async (req, res, bot) => {
+export const production = async (req, res, bot) => {
     debug('Bot runs in production mode')
     debug(`setting webhook: ${VERCEL_URL}`)
 
@@ -28,4 +28,3 @@ const production = async (req, res, bot) => {
     }
     debug(`starting webhook on port: ${PORT}`)
 }
-export { production }

@@ -25,7 +25,7 @@ export async function proccessVoiceMessage(ctx) {
         proccessGPTResponse(ctx, text)
     } catch (e) {
         await ctx.reply(
-            `Ошибка с API. Скажи Владилену, чтоб пофиксил. ${e.message}`
+            `Ошибка с API. Скажи Ильясу, чтоб пофиксил. ${e.message}`
         )
         console.error(`Error while proccessing voice message`, e.message)
     }
@@ -37,7 +37,7 @@ export async function proccessTextMessage(ctx) {
         proccessGPTResponse(ctx, ctx.message.text)
     } catch (e) {
         ctx.reply(
-            `Ошибка с API. Скажи Владилену, чтоб пофиксил. ${e.message}`
+            `Ошибка с API. Скажи Ильясу, чтоб пофиксил. ${e.message}`
         )
         console.error(`Error while proccessing text message`, e.message)
     }
@@ -94,7 +94,7 @@ async function proccessGPTResponse(ctx, text = '') {
 
         if (!response)
             return ctx.reply(
-                `Ошибка с API. Скажи Владилену, чтоб пофиксил. ${response}`
+                `Ошибка с API. Скажи Ильясу, чтоб пофиксил. ${response}`
             )
 
         ctx.session.messages.push(
